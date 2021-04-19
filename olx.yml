@@ -1,0 +1,22 @@
+Tech Statck:
+        - React 
+        - Node / Express
+        - Mongo
+        - GraphQL
+        - Typescript
+
+
+Features:
+    - Products and Services
+    - Profile Review System 
+    - Two accounts (provider / consumer)
+    - Admin page (to delete shady users)
+    - Dockerize?
+
+Client:
+    - Main page (To view all posts)
+    - Auth pages (type of account)
+    - Post an item page
+
+Server:
+    - 

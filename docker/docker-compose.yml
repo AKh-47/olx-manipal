@@ -1,0 +1,42 @@
+version: '3'
+services:
+    client:
+      stdin_open: true
+      build:
+        dockerfile: ../docker/client.dev.Dockerfile
+        context: ../client
+      volumes:
+        - /app/node_modules
+        - ../client:/app/client
+      ports:
+        - 3000:3000
+      environment:
+        - REACT_APP_API_URI=api
+    api:
+      build:
+        dockerfile: ../docker/api.dev.Dockerfile
+        context: ../server
+      volumes:
+        - /app/node_modules
+        - ../server:/app/api
+      environment:
+          - PORT=8000
+          - MONGO_URI=database:27017
+          - SECRET=hjfdsschfrsjedsk
+      expose:
+        - 8000
+      ports:
+        - 8000:8000
+    database:
+      image: mongo:latest
+      environment:
+        MONGO_INITDB_DATABASE: trello
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      volumes:
+        - mongodb_data:/data/db
+
+volumes:
+    mongodb_data:
+        external: false
+
