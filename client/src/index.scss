@@ -1,73 +1,8 @@
 @import "./styles/constants";
 @import "./styles/respond";
-
-html {
-  scroll-behavior: smooth;
-}
-
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-div{
-  font-family: $font-family, sans-serif, serif;
-}
-
-body {
-  background-color: $body-bg;
-  color: $text-color;
-  overflow-x: auto;
-}
-
-a {
-  &:link,
-  &:visited {
-    color: inherit;
-    text-decoration: none;
-  }
-}
-
-ul {
-  list-style: none;
-}
-
-textarea {
-  resize: none;
-}
-
-input,
-textarea {
-  border: none;
-  &:focus {
-    outline: none;
-  }
-}
-
-button {
-  border: none;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-i{
-  margin-right: .5rem;
-}
+@import "./styles/base";
 
 
-@import "./styles/auth.scss";
-@import "./styles/board.scss";
-@import "./styles/header.scss";
-@import "./styles/home.scss";
-@import "./styles/not-found.scss";
-@import "./styles/settings.scss";
-@import "./styles/dashboard.scss";
 
 
 
