@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client";
 
+// DUmmy user i created to test (ignore)
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNTZjZTEzZjY4MjI1MzM1MWNjMjI0NyIsIm5hbWUiOiJBa2hpbCIsImVtYWlsIjoia2FsYWFra2lAZ21haWwuY29tIiwiaWF0IjoxNjE2MzAxNTg5fQ.VzlsvDXHL3yz0nCAJJxoRMW22kDeDMC3B0T6NCgmxc0";
 

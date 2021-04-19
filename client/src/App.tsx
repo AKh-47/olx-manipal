@@ -9,6 +9,7 @@ export default function App(): ReactElement {
   return (
     <React.Fragment>
       <Switch>
+        <Route exact path="/" component={Landing} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Switch>
