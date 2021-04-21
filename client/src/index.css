@@ -18,8 +18,8 @@ div {
 }
 
 body {
-  background-color: #e8e8e8;
-  color: #212121;
+  background-color: #212121;
+  color: #fefefe;
   overflow-x: auto;
 }
 
@@ -75,6 +75,7 @@ i {
           align-items: center;
   padding: 0 1rem;
   border-radius: 3px;
+  background-color: #333;
 }
 
 .topbar .search {
@@ -88,8 +89,10 @@ i {
 }
 
 .topbar .search input {
-  border-bottom: 1px solid #212121;
+  border-bottom: 1px solid #fefefe;
   font-size: 1.15rem;
+  background-color: #333;
+  color: #fefefe;
 }
 
 .topbar .switch {
@@ -107,7 +110,7 @@ i {
 }
 
 .post {
-  background-color: #fefefe;
+  background-color: #333;
   margin: 1rem 0;
   padding: 1rem;
   min-height: 12rem;
@@ -118,7 +121,6 @@ i {
 }
 
 .post p {
-  color: #3338;
   margin-top: 1rem;
   width: 50%;
 }

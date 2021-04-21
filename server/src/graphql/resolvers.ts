@@ -1,4 +1,6 @@
 export default {
-  Query: {},
-  Mutation: {},
+  Query: {
+    greeting: () => "Hello World",
+  },
+  // Mutation: {},
 };
