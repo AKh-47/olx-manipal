@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema({
+  //WILL PRODUCER USERS AND CONSUMER USERS HAVE DIFFERENT SCHEMAS?
+  //ALSO WILL THE TWO TYPES OF PRODUCER USERS HAVE DIFFERENT SCHEMAS (SERVICE PROVIDER AND SELLER)
   name: {
     type: String,
     required: true,
@@ -15,6 +17,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     // minlength: 8,
   },
+  rating: {
+    required: true,
+    type: Number,
+    rated: Boolean,
+  },
+  isBanned: {
+    type: Boolean,
+  },
+
+  //I DONT THINK WE NEED THESE FIELDS AS COMMENTS AND POSTS WILL HAVE A USER FIELD ON THE ANYWAYSK
+  // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+  // posts: [{ type: Schema.Types.ObjectId }],
 });
 
 export default mongoose.model<any>("User", userSchema);
