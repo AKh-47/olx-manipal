@@ -1,8 +1,69 @@
 type Query {
-    greeting:String
+  greeting: Response
+  getPosts(userid: String): PostsResponse
+  getComments(postid: String): CommentsResponse
 }
 
+# type Mutation {
+#     creatPost{
+#         success: Boolean
+#         message: String
+#         post: Post
+#     }
+# }
 
+type Mutation {
+  createPost(title: String, description: String, price: Float): PostResponse
+  deletePost(postid: String): PostResponse
+  createComment(text: String, postid: String): CommentResponse
+  deleteComment(commentid: String): CommentResponse
+}
 
+type Response {
+  success: Boolean
+  message: String
+}
 
+type PostResponse {
+  success: Boolean
+  message: String
+  post: Post
+}
+type PostsResponse {
+  success: Boolean
+  message: String
+  posts: [Post]
+}
 
+type CommentResponse {
+  success: Boolean
+  message: String
+  comment: Comment
+}
+type CommentsResponse {
+  success: Boolean
+  message: String
+  comments: [Comment]
+}
+
+type User {
+  name: String
+  email: String
+  password: String
+  rating: Float
+  isBanned: Boolean
+}
+
+type Post {
+  title: String
+  description: String
+  image: String
+  user: User
+  price: Float
+}
+
+type Comment {
+  text: String
+  user: User
+  post: Post
+}
