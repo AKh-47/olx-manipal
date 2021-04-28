@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     // minlength: 8,
   },
   rating: {
-    required: true,
+    // required: true,
     type: Number,
     rated: Boolean,
   },

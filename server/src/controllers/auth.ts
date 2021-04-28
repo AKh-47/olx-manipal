@@ -30,6 +30,7 @@ export const registerHandler = async (
       name,
       email,
       password: hashedPass,
+      // rating: 0,
     });
 
     user = await user.save();
