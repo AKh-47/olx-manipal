@@ -1,10 +1,23 @@
 import Post from "../models/Post";
-import Comment from "../models/Comment";
+import User from "../models/User";
 
-export const getComments = async (_: undefined, { postid }: any) => {
+import Comment from "../models/Comment";
+import checkAuth from "../helpers/checkAuth";
+
+export const getComments = async (
+  _: undefined,
+  { postid }: any,
+  { user }: any
+) => {
   let comments;
   try {
+    //CHECKING IF LOGGED IN....
+    const isNotLoggedIn = checkAuth(user);
+    if (isNotLoggedIn) return isNotLoggedIn;
+
+    //IF POSTID PARAM IS SPECIFIED
     if (!postid) comments = await Comment.find();
+    //IF POSTID PARAM ISN'T SPECIFIED
     else {
       let post = await Post.findById(postid);
       comments = await Comment.find({ post });
@@ -26,19 +39,17 @@ export const getComments = async (_: undefined, { postid }: any) => {
   }
 };
 
-export const createComment = async (_: undefined, { text, postid }: any) => {
-  let post;
+export const createComment = async (
+  _: undefined,
+  { text, postid, userid }: any,
+  { user }: any
+) => {
   try {
-    post = await Post.findById(postid);
-  } catch (e) {
-    return {
-      success: false,
-      message: "Post not found",
-      comment: null,
-    };
-  }
-  let newComment = new Comment({ text, post });
-  try {
+    let mongoPost, mongoUser;
+    //FETCHING POST AND USER RELATED TO THE COMMENT
+    mongoPost = await Post.findById(postid);
+    mongoUser = await User.findById(userid);
+    let newComment = new Comment({ text, post: mongoPost, user: mongoUser });
     await newComment.save();
     return {
       success: true,
@@ -57,10 +68,25 @@ export const createComment = async (_: undefined, { text, postid }: any) => {
 
 export const deleteComment = async (
   _: undefined,
-  { commentid: commentid }: any
+  { commentid: commentid }: any,
+  { user }: any
 ) => {
   let comment;
   try {
+    //CHECK IF LOGGED IN
+    const isNotLoggedIn = checkAuth(user);
+    if (isNotLoggedIn) return isNotLoggedIn;
+
+    let comment = await Post.findById(commentid);
+
+    //CHECKING IF POST BELONGS TO THE USER TRYING TO DELETE IT
+    if (comment.user.toString() !== user.id) {
+      console.log("Do I come here");
+      return {
+        success: false,
+        message: "You are not authorized to perform this action ",
+      };
+    }
     comment = await Comment.findByIdAndDelete(commentid);
     return {
       success: true,
