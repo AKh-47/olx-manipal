@@ -41,14 +41,19 @@ export const getComments = async (
 
 export const createComment = async (
   _: undefined,
-  { text, postid, userid }: any,
+  { text, postid }: any,
   { user }: any
 ) => {
   try {
+    //CHECKING AUTH
+    const isNotLoggedIn = checkAuth(user);
+    if (isNotLoggedIn) return isNotLoggedIn;
+
     let mongoPost, mongoUser;
     //FETCHING POST AND USER RELATED TO THE COMMENT
     mongoPost = await Post.findById(postid);
-    mongoUser = await User.findById(userid);
+    mongoUser = await User.findById(user.id);
+    console.log({ mongoPost });
     let newComment = new Comment({ text, post: mongoPost, user: mongoUser });
     await newComment.save();
     return {
@@ -74,10 +79,12 @@ export const deleteComment = async (
   let comment;
   try {
     //CHECK IF LOGGED IN
+    console.log({ user });
     const isNotLoggedIn = checkAuth(user);
     if (isNotLoggedIn) return isNotLoggedIn;
 
-    let comment = await Post.findById(commentid);
+    let comment = await Comment.findById(commentid);
+    console.log({ comment });
 
     //CHECKING IF POST BELONGS TO THE USER TRYING TO DELETE IT
     if (comment.user.toString() !== user.id) {

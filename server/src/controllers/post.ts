@@ -16,16 +16,15 @@ export const getPosts = async (
   try {
     //IF USERID PARAM IS NOT SPECIFIED
     if (!userid) {
-      posts = await Post.find().populate();
+      posts = await Post.find();
       console.log({ posts });
     }
 
     //IF USERID PARAM IS SPECIFIED
     else {
       let user = await User.findById(userid);
-      posts = await Post.find({ user: user }).populate();
-      console.log("bruh");
-      console.log({ posts });
+      posts = await Post.find({ user: user });
+      // console.log({ posts });
     }
 
     return {
@@ -56,7 +55,7 @@ export const createPost = async (
     //FETCHING USER WHO CREATED POST
     const mongoUser = await User.findById(user.id);
     let newPost = new Post({ title, description, price, user: mongoUser });
-    console.log(newPost);
+    // console.log(newPost);
     await newPost.save();
     return {
       success: true,
@@ -87,7 +86,6 @@ export const deletePost = async (
 
     //CHECKING IF POST BELONGS TO THE USER TRYING TO DELETE IT
     if (post.user.toString() !== user.id) {
-      console.log("Do I come here");
       return {
         success: false,
         message: "You are not authorized to perform this action ",
